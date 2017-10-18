@@ -18,7 +18,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.addweup.awubluetooth.BluetoothDeviceUtils;
 import com.addweup.awubluetooth.io.BluetoothIO;
 import com.addweup.awubluetooth.io.BluetoothIOFactory;
 
