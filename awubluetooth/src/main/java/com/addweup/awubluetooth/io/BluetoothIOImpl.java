@@ -60,10 +60,9 @@ public class BluetoothIOImpl implements BluetoothIO, BluetoothCommunicatorInterf
     @Override
     public void onConnect(BluetoothSocket socket) {
         try{
+            if(bluetoothCommunicator != null) bluetoothCommunicator.close();
             bluetoothCommunicator = new BluetoothCommunicator(socket, this);
-            if(listener != null){
-                listener.onConnect();
-            }
+            if(listener != null) listener.onConnect();
         }catch (IOException e){
             bluetoothCommunicator = null;
             bluetoothConnector.connect();
@@ -72,17 +71,13 @@ public class BluetoothIOImpl implements BluetoothIO, BluetoothCommunicatorInterf
 
     @Override
     public void onResponse(String response) {
-        if(listener != null){
-            listener.onResponse(response);
-        }
+        if(listener != null) listener.onResponse(response);
     }
 
     @Override
     public void onDisconnect() {
         // 斷線會自動重連
-        if(listener != null){
-            listener.onDisconnect();
-        }
+        if(listener != null) listener.onDisconnect();
         bluetoothCommunicator = null;
         bluetoothConnector.connect();
     }

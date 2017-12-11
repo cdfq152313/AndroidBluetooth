@@ -86,8 +86,8 @@ public class BluetoothCommunicator implements BluetoothCommunicatorInterface{
     }
 
     public void close(){
-        listener.onDisconnect();
         closing = true;
+        listener.onDisconnect();
         try {
             printWriter.close();
             bufferedReader.close();

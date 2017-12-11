@@ -1,11 +1,6 @@
 package com.example.denny.mybluetooth;
 
-import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -47,7 +42,7 @@ public class ClientActivity extends AppCompatActivity implements BluetoothIO.Lis
         pairDevices = BluetoothDeviceUtils.listPairDevices();
         initView();
 
-        scanBluetooth();
+//        scanBluetooth();
     }
 
     private void initView(){
@@ -78,38 +73,38 @@ public class ClientActivity extends AppCompatActivity implements BluetoothIO.Lis
         searchListView.setAdapter(searchAdapter);
     }
 
-    private void scanBluetooth(){
-        // Register for broadcasts when a device is discovered.
-        IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
-        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
-        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
-        registerReceiver(mReceiver, filter);
-        BluetoothAdapter.getDefaultAdapter().startDiscovery();
-    }
-
-    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
-                Log.i(TAG, "onReceive: Start");
-            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
-                Log.i(TAG, "onReceive: Finish");
-            } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
-                // Discovery has found a device. Get the BluetoothDevice
-                // object and its info from the Intent.
-                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-                Log.d(TAG, "onReceive: " + device.getName());
-                searchDevice.add(device);
-                searchAdapter.add(device.getName());
-                searchAdapter.notifyDataSetChanged();
-            }
-        }
-    };
+//    private void scanBluetooth(){
+//        // Register for broadcasts when a device is discovered.
+//        IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+//        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
+//        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+//        registerReceiver(mReceiver, filter);
+//        BluetoothAdapter.getDefaultAdapter().startDiscovery();
+//    }
+//
+//    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+//        public void onReceive(Context context, Intent intent) {
+//            String action = intent.getAction();
+//            if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
+//                Log.i(TAG, "onReceive: Start");
+//            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
+//                Log.i(TAG, "onReceive: Finish");
+//            } else if (BluetoothDevice.ACTION_FOUND.equals(action)) {
+//                // Discovery has found a device. Get the BluetoothDevice
+//                // object and its info from the Intent.
+//                BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
+//                Log.d(TAG, "onReceive: " + device.getName());
+//                searchDevice.add(device);
+//                searchAdapter.add(device.getName());
+//                searchAdapter.notifyDataSetChanged();
+//            }
+//        }
+//    };
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(mReceiver);
+//        unregisterReceiver(mReceiver);
     }
 
     @Override
